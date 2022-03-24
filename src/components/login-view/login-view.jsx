@@ -14,8 +14,6 @@ export function LoginView(props) {
   const [usernameErr, setUsernameErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
 
-  const [registerClicked, setregState] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const isReq = validate();
@@ -38,6 +36,7 @@ export function LoginView(props) {
 
   const validate = () => {
     let isReq = true;
+
     if (!username) {
       setUsernameErr("Username Required");
       isReq = false;
@@ -48,6 +47,7 @@ export function LoginView(props) {
       setUsernameErr("");
       isReq = true;
     }
+    
     if (!password) {
       setPasswordErr("Password Required");
       isReq = false;
@@ -133,13 +133,8 @@ export function LoginView(props) {
                         label="Login"
                         onClick={handleSubmit}
                       ></Button>
-                      No account?{" "}
-                      <Link to="/register" >
-                        {" "}
-                        Get one here!
-                      </Link>
                     </div>
-                  </Form>
+                  </Form> 
                 </Card.Body>
               </Card>
             </CardGroup>

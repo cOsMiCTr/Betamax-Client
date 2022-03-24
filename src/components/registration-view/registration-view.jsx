@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Container, Form, Col, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import "./registration-view.scss"
+import { Redirect, Link } from "react-router-dom";
+import "./registration-view.scss";
 import { Button } from "../button/button";
 import FadeIn from "react-fade-in";
-
-
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState("");
@@ -16,81 +14,96 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState("");
   const [birthday, setBirthdate] = useState("");
 
-  const [values, setValues] = useState({
-    nameErr: "",
-    usernameErr: "",
-    passwordErr: "",
-    passwordRepeatErr: "",
-    emailErr: "",
-    birthdayErr: "",
-  });
+  const [usernameErr, setusernameErr] = useState("");
+  const [passwordErr, setpasswordErr] = useState("");
+  const [passwordRepeatErr, setpasswordRepeatErr] = useState("");
+  const [emailErr, setemailErr] = useState("");
+  const [birthdayErr, setbirthdayErr] = useState("");
 
   const validate = () => {
     let isReq = true;
 
     if (!username) {
-      setValues({...values, usernameErr: "Username is required"});
+      setusernameErr("Username Required");
       isReq = false;
-    } else if (username.length < 5) {
-      setValues({...values, usernameErr: "Username must be 5 characters long"});
+    } else if (username.length < 6) {
+      setusernameErr("Username must be 6 characters long");
       isReq = false;
-    } 
+    } else {
+      setusernameErr("");
+      isReq = true;
+    }
 
     if (!password) {
-      setValues({...values, passwordErr: "Password Required"});
+      setpasswordErr("Password Required");
       isReq = false;
-    } else if (password.length < 6) {
-      setValues({...values, passwordErr: "Password must be 6 characters long"});
+    } else if (password.length < 8) {
+      setpasswordErr("Password must be 8 characters long");
       isReq = false;
-    } 
+    } else {
+      setpasswordErr("");
+      isReq = true;
+    }
 
     if (!passwordRepeat) {
-      setValues({...values, passwordRepeatErr: "Please repeat the password you have entered"});
+      setpasswordRepeatErr("Please repeat the password you have entered");
       isReq = false;
     } else if (passwordRepeat !== password) {
-      setValues({...values, passwordRepeatErr: "Passwords have to match"});
+      setpasswordRepeatErr("Passwords have to match");
       isReq = false;
-    } 
+    } else {
+      setpasswordRepeatErr("");
+      isReq = true;
+    }
 
     if (!email) {
-      setValues({...values, emailErr: "Email is required"});
+      setemailErr("Email is required");
       isReq = false;
     } else if (email.indexOf("@") === -1) {
-      setValues({...values, usernameErr: "Email is invalid"});
+      setemailErr("Email is invalid");
       isReq = false;
-    } 
+    } else {
+      setemailErr("");
+      isReq = true;
+    }
 
+    if (!birthday) {
+      setbirthdayErr("Birthday should not be empty");
+      isReq = false;
+    } else {
+      setbirthdayErr("");
+      isReq = true;
+    }
     return isReq;
   };
 
-const handleSubmit =(e) => {
-  e.preventDefault();
-  if (isReq) {
-    axios.post("https://betamax-cosmictr.herokuapp.com/users", {
-      Name: name,
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
-    })
-    .then(response => {
-      const data = response.data;
-      console.log(data);
-      alert("You have succesfully registered to the best Movie platform!");
-      window.open("/", "_self")
-    })
-    .catch(response => {
-      console.error(response);
-      alert("Registration was unseccesful. Please try again!");
-    })
-  }
-}
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const isReq = validate();
+    if (isReq) {
+      axios
+        .post("https://betamax-cosmictr.herokuapp.com/users", {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday,
+        })
+        .then((response) => {
+          const data = response.data;
+          console.log(data);
+          alert("You have succesfully registered to the best Movie platform!");
+          window.open("/", "_self");
+        })
+        .catch((response) => {
+          console.error(response);
+          alert("Registration was unseccesful. Please try again!");
+        });
+    }
+  };
 
   return (
     <Container>
       <div>
-        <h1 className="heading display-1 text-center">BETAMAX</h1>
         <div className="welcome-text text-center">
           <h1>Welcome to our registration page</h1>
           <h1>You are one step away from mega adventure!</h1>
@@ -103,13 +116,14 @@ const handleSubmit =(e) => {
           <Form.Control
             type="text"
             value={username}
-            placeholder="Username"
+            autoComplete="name"
+            placeholder="Username (min 8 characters)"
             onChange={(e) => setUsername(e.target.value)}
           />
-          {values.usernameErr && (
+          {usernameErr && (
             <FadeIn>
               <div className="invalid-feedback" style={{ display: "block" }}>
-                {values.usernameErr}
+                {usernameErr}
               </div>
             </FadeIn>
           )}
@@ -118,15 +132,16 @@ const handleSubmit =(e) => {
           <Form.Label>Password:</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Password"
+            placeholder="Password (Password must be between 8 to 16 characters)"
             value={password}
+            autoComplete="new-password"
             minLength="1"
             onChange={(e) => setPassword(e.target.value)}
           />
-          {values.passwordErr && (
+          {passwordErr && (
             <FadeIn>
               <div className="invalid-feedback" style={{ display: "block" }}>
-                {values.passwordErr}
+                {passwordErr}
               </div>
             </FadeIn>
           )}
@@ -139,10 +154,10 @@ const handleSubmit =(e) => {
             value={passwordRepeat}
             onChange={(e) => setPasswordRepeat(e.target.value)}
           />
-          {values.passwordRepeatErr && (
+          {passwordRepeatErr && (
             <FadeIn>
               <div className="invalid-feedback" style={{ display: "block" }}>
-                {values.passwordRepeatErr}
+                {passwordRepeatErr}
               </div>
             </FadeIn>
           )}
@@ -152,13 +167,14 @@ const handleSubmit =(e) => {
           <Form.Control
             type="email"
             placeholder="Email"
+            autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-            {values.emailErr && (
+          {emailErr && (
             <FadeIn>
               <div className="invalid-feedback" style={{ display: "block" }}>
-                {values.emailErr}
+                {emailErr}
               </div>
             </FadeIn>
           )}
@@ -168,19 +184,26 @@ const handleSubmit =(e) => {
           <Form.Control
             className="birthday-input"
             type="date"
+            autoComplete="bday"
             value={birthday}
             onChange={(e) => setBirthdate(e.target.value)}
           />
+          {birthdayErr && (
+            <FadeIn>
+              <div className="invalid-feedback" style={{ display: "block" }}>
+                {birthdayErr}
+              </div>
+            </FadeIn>
+          )}
         </Form.Group>
-        <Button
-          size="sm"
-          label="Cancel"
-          onClick="window.location.reload();"
-        ></Button>
+
+        <Link to={"/"}>
+          <Button size="sm" label="Cancel" onClick={()=>""}></Button>
+        </Link>
         <Button
           size="sm"
           label="Register"
-          onClick={handleRegister}
+          onClick={handleSubmit}
           style={{ textAlign: "center" }}
         ></Button>
       </Form>
@@ -188,12 +211,11 @@ const handleSubmit =(e) => {
   );
 }
 
-
 RegistrationView.propTypes = {
   register: PropTypes.shape({
     Username: PropTypes.string.isRequired,
     Password: PropTypes.string.isRequired,
     Email: PropTypes.string.isRequired,
-    Birthday: PropTypes.string.isRequired
-  })
-}
+    Birthday: PropTypes.string.isRequired,
+  }),
+};

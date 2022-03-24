@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import "./profile-view.scss";
 import { Container, Card, Row, Col, Form } from "react-bootstrap";
 import { Button } from "../button/button";
+import FavoriteMovies from "./favorite-movies";
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -51,6 +52,7 @@ export class ProfileView extends React.Component {
         console.log(error);
       });
   };
+
   // update profile
   editUser = (e) => {
     e.preventDefault();
@@ -87,6 +89,50 @@ export class ProfileView extends React.Component {
       });
   };
 
+  // Delete a movie from FavoriteMovies list
+  onRemoveFavorite = (e, movie) => {
+    e.preventDefault();
+    const Username = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    axios
+      .delete(
+        `https://betamax-cosmictr.herokuapp.com/users/${Username}/movies/${movie._id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        alert("Movie removed");
+        this.componentDidMount();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // Delete account
+  onDeleteUser() {
+    const Username = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    axios
+      .delete(`https://betamax-cosmictr.herokuapp.com/users/${Username}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        alert("Profile deleted");
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        window.open("/", "_self");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   setUsername(value) {
     this.setState({
       Username: value,
@@ -113,19 +159,27 @@ export class ProfileView extends React.Component {
 
   render() {
     const { movies, onBackClick } = this.props;
-    const { FavoriteMovies, Username, Email, Birthday } = this.state;
+    const { FavoriteMovieList, Username, Email, Birthday } = this.state;
 
     if (!Username) {
       return null;
     }
 
     return (
-      <Container className="profile-view" align="center">
+      <Container className="profile-view">
         <Row>
           <Col>
             <Card className="update-profile">
               <Card.Body>
-                <Card.Title>Profile</Card.Title>
+                <Card.Title
+                  style={{
+                    textAlign: "center",
+                    fontSize: "36px",
+                    marginTop: "2rem",
+                  }}
+                >
+                  Profile
+                </Card.Title>
                 <Form
                   className="update-form"
                   onSubmit={(e) =>
@@ -137,8 +191,9 @@ export class ProfileView extends React.Component {
                       this.Birthday
                     )
                   }
+                  style={{ margin: "2rem" }}
                 >
-                  <Form.Group>
+                  <Form.Group style={{ margin: "2rem" }}>
                     <Form.Label>Username</Form.Label>
                     <Form.Control
                       type="text"
@@ -150,7 +205,7 @@ export class ProfileView extends React.Component {
                     />
                   </Form.Group>
 
-                  <Form.Group>
+                  <Form.Group style={{ margin: "2rem" }}>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                       type="password"
@@ -158,11 +213,10 @@ export class ProfileView extends React.Component {
                       placeholder="New Password"
                       value={""}
                       onChange={(e) => this.setPassword(e.target.value)}
-                      
                     />
                   </Form.Group>
 
-                  <Form.Group>
+                  <Form.Group style={{ margin: "2rem" }}>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                       type="email"
@@ -174,7 +228,7 @@ export class ProfileView extends React.Component {
                     />
                   </Form.Group>
 
-                  <Form.Group>
+                  <Form.Group style={{ margin: "2rem" }}>
                     <Form.Label>Birthday</Form.Label>
                     <Form.Control
                       type="date"
@@ -184,24 +238,25 @@ export class ProfileView extends React.Component {
                     />
                   </Form.Group>
 
-                    <Button
-                      variant="success"
-                      style={{ margin:"1rem" }}
-                      type="submit"
-                      label="Submit"
-                      onClick={this.editUser}
-                    >
-                      Update User
-                    </Button>
-                    <Button
-          label="Back"
-            variant="outline-primary"
-            onClick={() => {
-              onBackClick(null);
-            }}
-          ></Button>
-
+                  <Button
+                    variant="success"
+                    style={{ margin: "1rem" }}
+                    type="submit"
+                    label="Update"
+                    onClick={this.editUser}
+                  >
+                    Update User
+                  </Button>
+                  <Button
+                    label="Back"
+                    variant="outline-primary"
+                    onClick={() => {
+                      onBackClick(null);
+                    }}
+                  ></Button>
                 </Form>
+
+                
               </Card.Body>
             </Card>
           </Col>
@@ -214,20 +269,20 @@ export class ProfileView extends React.Component {
 ProfileView.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
-      Title: PropTypes.string.isRequired,
+      Title: PropTypes.string,
       Description: PropTypes.string,
       ImageURL: PropTypes.string,
       Genre: PropTypes.shape({
         Name: PropTypes.string,
         Description: PropTypes.string,
-      }).isRequired,
+      }),
       Director: PropTypes.shape({
         Bio: PropTypes.string,
         BirthYear: PropTypes.number,
         DeathYear: PropTypes.number,
         Name: PropTypes.string,
-      }).isRequired,
+      }),
     })
-  ).isRequired,
-  onBackClick: PropTypes.func.isRequired,
+  ),
+  onBackClick: PropTypes.func,
 };

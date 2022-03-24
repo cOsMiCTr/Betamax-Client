@@ -6,7 +6,7 @@ import { Router, Route, BrowserRouter, Link } from "react-router-dom";
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onMovieClick } = this.props;
+    const { movie } = this.props;
 
     if (!movie.Genre.Description) {
       return (movie.Genre.Description = "");
@@ -25,7 +25,7 @@ export class MovieCard extends React.Component {
           <Card.Img
             variant="top"
             src={movie.ImageURL}
-            key={movie.Title}
+            key={movie._id}
             style={{ height: "300px" }}
           />
         </Link>
@@ -52,9 +52,9 @@ export class MovieCard extends React.Component {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
+    Title: PropTypes.string,
     Description: PropTypes.string,
-    ImagePath: PropTypes.string,
+    ImageURL: PropTypes.string,
     Genre: PropTypes.shape({
       Name: PropTypes.string,
     }),

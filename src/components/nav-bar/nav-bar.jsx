@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Button } from '../button/button';
-
+import { Link } from 'react-router-dom';
 import './nav-bar.scss';
 
 export function NavbarView({user}) {
@@ -29,15 +29,12 @@ export function NavbarView({user}) {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
                         {isAuth() && (
-                            <Nav.Link href="/profile" >{user}</Nav.Link>
+                            <Link to={`/users/${user}`}>{user}</Link>
                         )}
                         {isAuth() && (
                             <Button variant="link" label="Logout" onClick={() => {
                                 onLoggedOut() 
                             }}></Button>
-                        )}
-                        {!isAuth() && (
-                            <Nav.Link href="/">Login</Nav.Link>
                         )}
                         {!isAuth() && (
                             <Nav.Link href="/register">Register</Nav.Link>

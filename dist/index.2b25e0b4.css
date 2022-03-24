@@ -104,6 +104,10 @@ button:focus {
   background-color: white;
 }
 
+a {
+  align-self: center;
+}
+
 * {
   font-family: "futura";
 }
