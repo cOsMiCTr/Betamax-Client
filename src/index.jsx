@@ -7,9 +7,9 @@ import "./index.scss"
 class BetamaxApplication extends React.PureComponent {
   render() {
     return (
-      <Container>
+
         <MainView />
-      </Container>
+
     );
   }
 }

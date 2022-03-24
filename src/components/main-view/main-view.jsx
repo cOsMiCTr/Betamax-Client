@@ -12,10 +12,11 @@ import { RegisterView } from "../registration-view/registration-view";
 import { MovieCard } from "../movie-card/movie-card";
 // view all movies
 import { MovieView } from "../movie-view/movie-view";
-import { Router, Route, BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { Button } from "../button/button";
 import { NavbarView } from "../nav-bar/nav-bar";
 import { ProfileView } from "../profile-view/profile-view";
+import { RegistrationView } from "../registration-view/registration-view";
 
 export class MainView extends React.Component {
   constructor() {
@@ -90,7 +91,6 @@ export class MainView extends React.Component {
     });
   }
 
-
   render() {
     const { movies, user } = this.state;
 
@@ -105,10 +105,24 @@ export class MainView extends React.Component {
     if (movies.length === 0) return <div className="main-view" />;
 
     return (
-      <BrowserRouter>
+      <Router>
         <NavbarView user={user} />
         <Container>
           <Row className="main-view justify-content-md-center">
+          <Route
+              exact
+              path="/register"
+              render={() => {
+                if (user) return <Redirect to="/" />;
+                return (
+                  <Col>
+                    <RegistrationView
+                    onBackClick={() => history.goBack()}
+                    />
+                  </Col>
+                );
+              }}
+            />
             <Route
               exact
               path="/"
@@ -146,9 +160,10 @@ export class MainView extends React.Component {
                 );
               }}
             />
+            
           </Row>
         </Container>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
