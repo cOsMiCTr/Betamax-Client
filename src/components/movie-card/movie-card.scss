@@ -1,0 +1,21 @@
+img {
+    width: 350px;
+}
+
+.accordion-button {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+}
+
+button:focus {
+    outline:invert;
+}
+
+
+// $test: "onur";
+//   @if $test == "onur" {
+//     .img {
+//         display: none;
+//       }
+//   }

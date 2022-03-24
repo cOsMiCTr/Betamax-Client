@@ -1,0 +1,17 @@
+.main-view {
+    grid-template-rows: 80px calc(75vh - 80px) 25vh 80px;
+    -o-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.inner {
+    overflow: hidden;
+    transition: max-height 0.2s ease;
+  }
+
+  .btn {
+      float: right;
+  }
+
