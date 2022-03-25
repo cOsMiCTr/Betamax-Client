@@ -103,8 +103,6 @@ export class MainView extends React.Component {
               );
             }}
           />
-          
-
           <Route
             path={`/users/${user}`}
             render={({ history }) => {

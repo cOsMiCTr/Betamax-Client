@@ -1,10 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import "./profile-view.scss";
 import { Container, Card, Row, Col, Form } from "react-bootstrap";
 import { Button } from "../button/button";
-import FavoriteMovies from "./favorite-movies";
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -47,6 +46,7 @@ export class ProfileView extends React.Component {
           Birthday: response.data.Birthday,
           FavoriteMovies: response.data.FavoriteMovies,
         });
+
       })
       .catch(function (error) {
         console.log(error);
@@ -158,8 +158,17 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { movies, onBackClick } = this.props;
-    const { FavoriteMovieList, Username, Email, Birthday } = this.state;
+    const { movies, onBackClick, user } = this.props;
+    const { Username, Email, Birthday } = this.state;
+    let FavoriteMoviesArray = [];
+
+    if (user && user.FavoriteMovies) {
+      FavoriteMoviesArray = movies.filter((movie) =>
+        user.FavoriteMovies.includes(movie._id)
+      );
+    } else {
+      FavoriteMoviesArray = [];
+    }
 
     if (!Username) {
       return null;
@@ -255,11 +264,19 @@ export class ProfileView extends React.Component {
                     }}
                   ></Button>
                 </Form>
-
-                
               </Card.Body>
             </Card>
           </Col>
+        </Row>
+        <Row>
+          {FavoriteMoviesArray.map((movie) => (
+            <Col md={4} key={movie._id} className="my-2">
+              <MovieCard movie={movie} />
+
+              
+            </Col>
+          ))}
+          
         </Row>
       </Container>
     );

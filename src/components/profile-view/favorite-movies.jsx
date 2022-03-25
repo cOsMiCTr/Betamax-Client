@@ -2,6 +2,8 @@ import React from "react";
 import { Container, Card, Button, Row, Col, Form } from "react-bootstrap";
 
 
+
+
 function FavoriteMovies(favoriteMovieList) {
   return (
     <div>
