@@ -20,6 +20,7 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       user: null,
+      isFavorite: false,
     };
   }
 
@@ -165,7 +166,7 @@ export class MainView extends React.Component {
               );
             }}
           />
-                    <Route
+          <Route
             path="/genre/:name"
             render={({ match, history }) => {
               if (!user) {

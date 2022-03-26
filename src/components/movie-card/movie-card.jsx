@@ -1,12 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container, Col, Row, Card, Button, Accordion } from "react-bootstrap";
+import { Card, Button, Accordion } from "react-bootstrap";
 import "./movie-card.scss";
-import { Router, Route, BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export class MovieCard extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isFavorite: false,
+    };
+  }
+
   render() {
     const { movie } = this.props;
+    const { isFavorite } = this.state;
 
     if (!movie.Genre.Description) {
       return (movie.Genre.Description = "");
@@ -41,9 +49,27 @@ export class MovieCard extends React.Component {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          <Card.Text className="genreInCard" style={{ textAlign: "right" }}>
+          <Card.Text style={{ textAlign: "right" }}>
             Genre: {movie.Genre.Name}
           </Card.Text>
+          <div 
+            render={() => {
+              if (!isFavorite) {
+                return (
+                  <Button style={{ textAlign: "right" }}>
+                    + Add to favorites
+                  </Button>
+                );
+              } else {
+                return (
+                  <Button style={{ textAlign: "right" }}>
+                    - Remove from favorites
+                  </Button>
+                );
+              }
+            }}
+          ></div>
+
         </Card.Body>
       </Card>
     );
