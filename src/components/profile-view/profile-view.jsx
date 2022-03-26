@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import "./profile-view.scss";
 import { Container, Card, Row, Col, Form } from "react-bootstrap";
 import { Button } from "../button/button";
+import { MovieCard } from "../movie-card/movie-card";
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -15,6 +16,7 @@ export class ProfileView extends React.Component {
       Email: null,
       Birthday: null,
       FavoriteMovies: [],
+      changeMarker: false
     };
   }
 
@@ -46,7 +48,6 @@ export class ProfileView extends React.Component {
           Birthday: response.data.Birthday,
           FavoriteMovies: response.data.FavoriteMovies,
         });
-
       })
       .catch(function (error) {
         console.log(error);
@@ -159,16 +160,10 @@ export class ProfileView extends React.Component {
 
   render() {
     const { movies, onBackClick, user } = this.props;
-    const { Username, Email, Birthday } = this.state;
-    let FavoriteMoviesArray = [];
+    const { Username, Email, Birthday, FavoriteMovies } = this.state;
 
-    if (user && user.FavoriteMovies) {
-      FavoriteMoviesArray = movies.filter((movie) =>
-        user.FavoriteMovies.includes(movie._id)
-      );
-    } else {
-      FavoriteMoviesArray = [];
-    }
+    const FavoriteMoviesArray =
+      movies.filter((movie) => FavoriteMovies.includes(movie._id)) || [];
 
     if (!Username) {
       return null;
@@ -191,17 +186,10 @@ export class ProfileView extends React.Component {
                 </Card.Title>
                 <Form
                   className="update-form"
-                  onSubmit={(e) =>
-                    this.editUser(
-                      e,
-                      this.Username,
-                      this.Password,
-                      this.Email,
-                      this.Birthday
-                    )
-                  }
+
                   style={{ margin: "2rem" }}
                 >
+                  
                   <Form.Group style={{ margin: "2rem" }}>
                     <Form.Label>Username</Form.Label>
                     <Form.Control
@@ -252,17 +240,21 @@ export class ProfileView extends React.Component {
                     style={{ margin: "1rem" }}
                     type="submit"
                     label="Update"
-                    onClick={this.editUser}
+                    onClick={(e) =>
+                      this.editUser(
+                        e,
+                        this.Username,
+                        this.Password,
+                        this.Email,
+                        this.Birthday
+                      )
+                    }
                   >
                     Update User
                   </Button>
-                  <Button
-                    label="Back"
-                    variant="outline-primary"
-                    onClick={() => {
-                      onBackClick(null);
-                    }}
-                  ></Button>
+                  <div className="backButton">
+                    <Button variant="outline-primary" onClick={() => { onBackClick(null); }}>Back</Button>
+                </div>
                 </Form>
               </Card.Body>
             </Card>
@@ -272,12 +264,10 @@ export class ProfileView extends React.Component {
           {FavoriteMoviesArray.map((movie) => (
             <Col md={4} key={movie._id} className="my-2">
               <MovieCard movie={movie} />
-
-              
             </Col>
           ))}
-          
         </Row>
+
       </Container>
     );
   }
@@ -294,10 +284,10 @@ ProfileView.propTypes = {
         Description: PropTypes.string,
       }),
       Director: PropTypes.shape({
+        Name: PropTypes.string,
         Bio: PropTypes.string,
         BirthYear: PropTypes.number,
         DeathYear: PropTypes.number,
-        Name: PropTypes.string,
       }),
     })
   ),

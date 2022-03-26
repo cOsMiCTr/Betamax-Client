@@ -108,6 +108,18 @@ a {
   align-self: center;
 }
 
+.label {
+  font-family: "futura";
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.label {
+  font-family: "futura";
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
 * {
   font-family: "futura";
 }

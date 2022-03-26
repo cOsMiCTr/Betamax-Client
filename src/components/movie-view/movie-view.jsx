@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../button/button";
 import { Card, Container, Row, Col, CardGroup } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./movie-view.scss";
 
 export class MovieView extends React.Component {
@@ -17,7 +18,8 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie } = this.props;
+    const { movie, Director } = this.props;
+
     return (
       <Container>
         <Row>
@@ -46,6 +48,20 @@ export class MovieView extends React.Component {
                   >
                     {movie.Description}{" "}
                   </Card.Text>
+                  <Card.Text>{movie.Bio}</Card.Text>
+                  <Card.Text className="movie-genre" style={{ margin: "1rem" }}>
+                    Director: {" "}
+                    <Link to={`/directors/${movie.Director.Name}`}>
+                      {movie.Director.Name}
+                    </Link>
+                  </Card.Text>
+
+                  <Card.Text className="movie-genre" style={{ margin: "1rem" }}>
+                    Genre: {" "}
+                    <Link to={`/genre/${movie.Genre.Name}`}>
+                      {movie.Genre.Name}
+                    </Link>
+                  </Card.Text>
                   <Button
                     label="Back"
                     onClick={() => {
@@ -53,17 +69,12 @@ export class MovieView extends React.Component {
                     }}
                     style={{ textAlign: "center" }}
                   ></Button>
-
-
-
-
-
                 </Card.Body>
               </Card>
             </CardGroup>
           </Col>
         </Row>
-</Container>
+      </Container>
     );
   }
 }
