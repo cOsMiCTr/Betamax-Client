@@ -3,8 +3,9 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import "./profile-view.scss";
 import { Container, Card, Row, Col, Form } from "react-bootstrap";
-import { Button } from "../button/button";
+import { Button} from "../button/button";
 import { MovieCard } from "../movie-card/movie-card";
+import { Button as ButtonSpecial } from "react-bootstrap";
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -57,12 +58,12 @@ export class ProfileView extends React.Component {
   // update profile
   editUser = (e) => {
     e.preventDefault();
-    const Username = localStorage.getItem("user");
+    const user = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
     axios
       .put(
-        `https://betamax-cosmictr.herokuapp.com/${Username}`,
+        `https://betamax-cosmictr.herokuapp.com/${user}`,
         {
           Username: this.state.Username,
           Password: this.state.Password,
@@ -90,7 +91,7 @@ export class ProfileView extends React.Component {
       });
   };
 
-  // Delete a movie from FavoriteMovies list
+
   onRemoveFavorite = (e, movie) => {
     e.preventDefault();
     const Username = localStorage.getItem("user");
@@ -113,26 +114,8 @@ export class ProfileView extends React.Component {
       });
   };
 
-  // Delete account
-  onDeleteUser() {
-    const Username = localStorage.getItem("user");
-    const token = localStorage.getItem("token");
 
-    axios
-      .delete(`https://betamax-cosmictr.herokuapp.com/users/${Username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        console.log(response);
-        alert("Profile deleted");
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        window.open("/", "_self");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+
 
   setUsername(value) {
     this.setState({
@@ -151,6 +134,7 @@ export class ProfileView extends React.Component {
       Email: value,
     });
   }
+  
 
   setBirthday(value) {
     this.setState({
@@ -159,7 +143,7 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { movies, onBackClick, user } = this.props;
+    const { movies, user } = this.props;
     const { Username, Email, Birthday, FavoriteMovies } = this.state;
 
     const FavoriteMoviesArray =
@@ -197,6 +181,7 @@ export class ProfileView extends React.Component {
                       name="Username"
                       placeholder="New Username"
                       value={Username}
+                      on
                       onChange={(e) => this.setUsername(e.target.value)}
                       required
                     />
@@ -230,6 +215,7 @@ export class ProfileView extends React.Component {
                     <Form.Control
                       type="date"
                       name="Birthday"
+         
                       value={Birthday}
                       onChange={(e) => this.setBirthday(e.target.value)}
                     />
@@ -253,11 +239,14 @@ export class ProfileView extends React.Component {
                     Update User
                   </Button>
                   <div className="backButton">
-                    <Button variant="outline-primary" onClick={() => { onBackClick(null); }}>Back</Button>
+                    <Button variant="outline-primary" onClick={() => { history.pushState(null, null, '/'); }} label="Back"></Button>
                 </div>
                 </Form>
               </Card.Body>
             </Card>
+            <div className="deleteAccount">
+                    <ButtonSpecial variant="danger" style={{margin:"1rem"}} onClick={onDeleteUser } label="Delete Account"> Delete Account</ButtonSpecial>
+                </div>
           </Col>
         </Row>
         <Row>
@@ -289,6 +278,15 @@ ProfileView.propTypes = {
         BirthYear: PropTypes.number,
         DeathYear: PropTypes.number,
       }),
+    })
+  ),
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      Username: PropTypes.string,
+      Password: PropTypes.string,
+      Email: PropTypes.string,
+      Birthday: PropTypes.string,
+      FavoriteMovies: PropTypes.arrayOf(PropTypes.string),
     })
   ),
   onBackClick: PropTypes.func,

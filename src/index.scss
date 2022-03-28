@@ -1,11 +1,88 @@
+// @media screen and (min-width: 0) and (max-width: 480px) and (max-aspect-ratio: 4 / 3) {
+//   body,
+//   html {
+//     font-size: 1vw;
+//     background-color: black;
+//     grid-template-rows: 80px calc(75vh - 80px) 25vh 80px;
+//     -o-transition: all 0.5s;
+//     -moz-transition: all 0.5s;
+//     -webkit-transition: all 0.5s;
+//     transition: all 0.5s;
+//   }
+//   .accordion-button {
+//     background-color: transparent;
+//     border: none;
+
+// }
+
+// }
+
+// @media screen and (min-width: 481px) and (max-width: 840px) and (max-aspect-ratio: 4 / 3) {
+//   body,
+//   html {
+//     font-size: 1vw;
+
+//     grid-template-rows: 80px calc(75vh - 80px) 25vh 80px;
+//     -o-transition: all 0.5s;
+//     -moz-transition: all 0.5s;
+//     -webkit-transition: all 0.5s;
+//     transition: all 0.5s;
+//   }
+//   .accordion-button {
+//     background-color: transparent;
+//     border: none;
+
+// }
+// }
+
+// @media screen and (min-width: 841px) and (max-aspect-ratio: 4 / 3) {
+//   body,
+//   html {
+//     font-size: 1vw;
+
+//     grid-template-rows: 80px calc(75vh - 80px) 25vh 80px;
+//     -o-transition: all 0.5s;
+//     -moz-transition: all 0.5s;
+//     -webkit-transition: all 0.5s;
+//     transition: all 0.5s;
+//   }
+//   .accordion-button {
+//     background-color: transparent;
+//     border: none;
+
+// }
+// }
+
+// @media screen and (min-width: 1251px)   {
+//     body,
+//     html {
+//       font-size: 1vw;
+//       grid-template-rows: 80px calc(75vh - 80px) 25vh 80px;
+//       -o-transition: all 0.5s;
+//       -moz-transition: all 0.5s;
+//       -webkit-transition: all 0.5s;
+//       transition: all 0.5s;
+//     }
+//     .accordion-button {
+//       background-color: transparent;
+//       border: none;
+  
+//   }
+//   }
+
 * {
-    font-family: "futura"
+  font-family: "futura";
 }
 
 .heading {
-    font-family: "futura"
+  font-family: "futura";
 }
 
 .heading {
-    font-family: "futura"
+  font-family: "futura";
+}
+
+.col-md-3 {
+  margin: 1.5
+  rem;
 }

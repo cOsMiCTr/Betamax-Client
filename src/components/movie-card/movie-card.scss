@@ -13,9 +13,9 @@ button:focus {
 }
 
 
-// $test: "onur";
-//   @if $test == "onur" {
-//     .img {
-//         display: none;
-//       }
-//   }
+.accordion-button:hover {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+}
+

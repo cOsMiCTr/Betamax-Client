@@ -8,13 +8,13 @@ export class MovieCard extends React.Component {
   constructor() {
     super();
     this.state = {
-      isFavorite: false,
+      // isFavorite: false,
     };
   }
 
   render() {
     const { movie } = this.props;
-    const { isFavorite } = this.state;
+    // const { isFavorite } = this.state;
 
     if (!movie.Genre.Description) {
       return (movie.Genre.Description = "");
@@ -24,7 +24,7 @@ export class MovieCard extends React.Component {
       <Card
         style={{
           height: "500px",
-          margin: "2rem",
+          margin: "3rem",
           width: "250px",
           maxWidth: "500px",
         }}
@@ -52,23 +52,7 @@ export class MovieCard extends React.Component {
           <Card.Text style={{ textAlign: "right" }}>
             Genre: {movie.Genre.Name}
           </Card.Text>
-          <div 
-            render={() => {
-              if (!isFavorite) {
-                return (
-                  <Button style={{ textAlign: "right" }}>
-                    + Add to favorites
-                  </Button>
-                );
-              } else {
-                return (
-                  <Button style={{ textAlign: "right" }}>
-                    - Remove from favorites
-                  </Button>
-                );
-              }
-            }}
-          ></div>
+
 
         </Card.Body>
       </Card>

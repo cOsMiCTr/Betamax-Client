@@ -68,6 +68,31 @@ export class MainView extends React.Component {
     });
   }
 
+      // Delete account
+      onDeleteUser() {
+        const Username = localStorage.getItem("user");
+        const token = localStorage.getItem("token");
+        
+        axios
+          .delete(`https://betamax-cosmictr.herokuapp.com/users/${Username}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((response) => {
+            console.log(response);
+            
+            localStorage.removeItem("user");
+            localStorage.removeItem("token");
+            this.setState({
+              user: null,
+            });
+            alert("Profile deleted");
+            window.open("/", "_self");
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+
   render() {
     const { movies, user } = this.state;
     return (
@@ -111,6 +136,7 @@ export class MainView extends React.Component {
                   <ProfileView
                     user={user}
                     onBackClick={() => history.goBack()}
+                    onDeleteUser={() => this.onDeleteUser()}
                     movies={movies}
                   />
                 </Col>

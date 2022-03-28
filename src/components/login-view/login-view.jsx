@@ -18,7 +18,6 @@ export function LoginView(props) {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
-      /* Send request to the server for authentication */
       axios
         .post("https://betamax-cosmictr.herokuapp.com/login", {
           Username: username,
