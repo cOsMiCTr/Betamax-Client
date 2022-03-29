@@ -29,13 +29,10 @@ export class MovieView extends React.Component {
 
   addFavorite(movie) {
     let token = localStorage.getItem("token");
-    let user = localStorage.getItem("user");
-
-    let url = `https://betamax-cosmictr.herokuapp.com/users/${user}/${movie._id}`;
-
+    let Username = localStorage.getItem("user");
 
     axios
-      .post(url, "", {
+      .post(`https://betamax-cosmictr.herokuapp.com/users/${Username}/${movie._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -44,7 +41,7 @@ export class MovieView extends React.Component {
         alert("Movies has been added to your favorites list!");
       })
       .catch((e) => {
-        console.log("There is no such user!");
+        console.log(e);
       });
   }
 
@@ -61,11 +58,11 @@ export class MovieView extends React.Component {
       })
       .then((response) => {
         console.log(response);
-        windows.open("/", "_self");
+        history.back();
         alert("Movies has been added to your favorites list!");
       })
       .catch((e) => {
-        console.log("There is no such user!");
+        console.log(e);
       });
   }
 

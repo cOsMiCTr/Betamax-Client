@@ -5,16 +5,10 @@ import "./movie-card.scss";
 import { Link } from "react-router-dom";
 
 export class MovieCard extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      // isFavorite: false,
-    };
-  }
 
   render() {
     const { movie } = this.props;
-    // const { isFavorite } = this.state;
+
 
     if (!movie.Genre.Description) {
       return (movie.Genre.Description = "");
@@ -34,7 +28,7 @@ export class MovieCard extends React.Component {
             variant="top"
             src={movie.ImageURL}
             key={movie._id}
-            style={{ height: "300px" }}
+            style={{ height: "300px"}}
           />
         </Link>
         <Card.Body>

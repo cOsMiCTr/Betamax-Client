@@ -103,6 +103,10 @@ button:focus {
   border: none;
   font-size: 20px;
 }
+
+.card {
+  display: flex;
+}
 .btn-primary {
   margin: "3rem";
 }
@@ -136,9 +140,5 @@ a {
 
 .heading {
   font-family: "futura";
-}
-
-.col-md-3 {
-  margin: 1.5 rem;
 }
 /*# sourceMappingURL=index.2b25e0b4.css.map */

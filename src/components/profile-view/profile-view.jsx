@@ -3,7 +3,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import "./profile-view.scss";
 import { Container, Card, Row, Col, Form } from "react-bootstrap";
-import { Button} from "../button/button";
+import { Button } from "../button/button";
 import { MovieCard } from "../movie-card/movie-card";
 import { Button as ButtonSpecial } from "react-bootstrap";
 
@@ -17,7 +17,7 @@ export class ProfileView extends React.Component {
       Email: null,
       Birthday: null,
       FavoriteMovies: [],
-      changeMarker: false
+      changeMarker: false,
     };
   }
 
@@ -58,12 +58,12 @@ export class ProfileView extends React.Component {
   // update profile
   editUser = (e) => {
     e.preventDefault();
-    const user = localStorage.getItem("user");
+    const Username = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
     axios
       .put(
-        `https://betamax-cosmictr.herokuapp.com/${user}`,
+        `https://betamax-cosmictr.herokuapp.com/users/${Username}`,
         {
           Username: this.state.Username,
           Password: this.state.Password,
@@ -82,7 +82,6 @@ export class ProfileView extends React.Component {
           Birthday: response.data.Birthday,
         });
 
-        localStorage.setItem("user", this.state.Username);
         alert("Profile updated");
         window.open("/profile", "_self");
       })
@@ -91,6 +90,23 @@ export class ProfileView extends React.Component {
       });
   };
 
+  deleteUser = () => {
+    const Username = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    axios
+      .delete(`https://betamax-cosmictr.herokuapp.com/users/${Username}`, {
+         headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        this.onLoggedOut();
+        alert("Profile deleted");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   onRemoveFavorite = (e, movie) => {
     e.preventDefault();
@@ -99,23 +115,20 @@ export class ProfileView extends React.Component {
 
     axios
       .delete(
-        `https://betamax-cosmictr.herokuapp.com/users/${Username}/movies/${movie._id}`,
+        `https://betamax-cosmictr.herokuapp.com/users/${Username}/${movie._id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
       .then((response) => {
         console.log(response);
-        alert("Movie removed");
+        alert("Movie has been removed");
         this.componentDidMount();
       })
       .catch(function (error) {
         console.log(error);
       });
   };
-
-
-
 
   setUsername(value) {
     this.setState({
@@ -134,7 +147,6 @@ export class ProfileView extends React.Component {
       Email: value,
     });
   }
-  
 
   setBirthday(value) {
     this.setState({
@@ -157,48 +169,43 @@ export class ProfileView extends React.Component {
       <Container className="profile-view">
         <Row>
           <Col>
-            <Card className="update-profile">
+            <Card>
               <Card.Body>
-                <Card.Title
-                  style={{
-                    textAlign: "center",
-                    fontSize: "36px",
-                    marginTop: "2rem",
-                  }}
-                >
-                  Profile
-                </Card.Title>
+                <Card.Title>Profile</Card.Title>
                 <Form
                   className="update-form"
-
-                  style={{ margin: "2rem" }}
+                  onSubmit={(e) =>
+                    this.editUser(
+                      e,
+                      this.Username,
+                      this.Password,
+                      this.Email,
+                      this.Birthday
+                    )
+                  }
                 >
-                  
-                  <Form.Group style={{ margin: "2rem" }}>
+                  <Form.Group>
                     <Form.Label>Username</Form.Label>
                     <Form.Control
                       type="text"
                       name="Username"
                       placeholder="New Username"
                       value={Username}
-                      on
                       onChange={(e) => this.setUsername(e.target.value)}
-                      required
                     />
                   </Form.Group>
 
-                  <Form.Group style={{ margin: "2rem" }}>
+                  <Form.Group>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                       type="password"
                       name="Password"
                       placeholder="New Password"
-                      value={""}
                       onChange={(e) => this.setPassword(e.target.value)}
                     />
                   </Form.Group>
 
-                  <Form.Group style={{ margin: "2rem" }}>
+                  <Form.Group>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                       type="email"
@@ -206,57 +213,53 @@ export class ProfileView extends React.Component {
                       placeholder="Enter Email"
                       value={Email}
                       onChange={(e) => this.setEmail(e.target.value)}
-                      required
                     />
                   </Form.Group>
 
-                  <Form.Group style={{ margin: "2rem" }}>
+                  <Form.Group>
                     <Form.Label>Birthday</Form.Label>
                     <Form.Control
                       type="date"
                       name="Birthday"
-         
                       value={Birthday}
                       onChange={(e) => this.setBirthday(e.target.value)}
                     />
                   </Form.Group>
-
-                  <Button
-                    variant="success"
-                    style={{ margin: "1rem" }}
-                    type="submit"
-                    label="Update"
-                    onClick={(e) =>
-                      this.editUser(
-                        e,
-                        this.Username,
-                        this.Password,
-                        this.Email,
-                        this.Birthday
-                      )
-                    }
-                  >
-                    Update User
-                  </Button>
-                  <div className="backButton">
-                    <Button variant="outline-primary" onClick={() => { history.pushState(null, null, '/'); }} label="Back"></Button>
-                </div>
+                  <div>
+                    <Button
+                      type="submit"
+                      label="Submit"
+                      onClick={this.editUser}
+                    >
+                      Update Data
+                    </Button>
+                  </div>
                 </Form>
+                <Button
+                  onClick={() => {
+                    history.back();
+                  }}
+                  label="Back"
+                ></Button>
+                <Button
+                  label="Delete User"
+                  onClick={() => this.deleteUser()}
+                >
+                  Delete Profile
+                </Button>
               </Card.Body>
             </Card>
-            <div className="deleteAccount">
-                    <ButtonSpecial variant="danger" style={{margin:"1rem"}} onClick={onDeleteUser } label="Delete Account"> Delete Account</ButtonSpecial>
-                </div>
           </Col>
         </Row>
         <Row>
           {FavoriteMoviesArray.map((movie) => (
             <Col md={4} key={movie._id} className="my-2">
-              <MovieCard movie={movie} />
+              <Button label="Remove" onClick={(e) => this.onRemoveFavorite(e, movie)}/>
+              <MovieCard movie={movie}/>
+              
             </Col>
           ))}
         </Row>
-
       </Container>
     );
   }

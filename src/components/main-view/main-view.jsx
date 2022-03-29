@@ -136,7 +136,6 @@ export class MainView extends React.Component {
                   <ProfileView
                     user={user}
                     onBackClick={() => history.goBack()}
-                    onDeleteUser={() => this.onDeleteUser()}
                     movies={movies}
                   />
                 </Col>
