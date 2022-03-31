@@ -170,10 +170,10 @@ export class ProfileView extends React.Component {
         <Row>
           <Col>
             <Card>
-              <Card.Body>
+              <Card.Body className="update-form">
                 <Card.Title>Profile</Card.Title>
                 <Form
-                  className="update-form"
+                  
                   onSubmit={(e) =>
                     this.editUser(
                       e,
