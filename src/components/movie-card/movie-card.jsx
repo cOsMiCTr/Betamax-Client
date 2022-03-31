@@ -16,6 +16,7 @@ export class MovieCard extends React.Component {
 
     return (
       <Card
+      className="movie-card"
         style={{
           height: "500px",
           margin: "3rem",
