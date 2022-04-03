@@ -15,7 +15,7 @@ import { ProfileView } from "../profile-view/profile-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { GenreView } from "../genre-view/genre-view";
 
-import { setMovies } from "../../actions/actions";
+import { setMovies, setUser, setUserData } from "../../actions/actions";
 
 import MoviesList from "../movies-list/movies-list";
 
@@ -113,26 +113,7 @@ class MainView extends React.Component {
                   </Col>
                 );
               if (movies.length === 0) return <div className="main-view" />;
-              // #6
               return <MoviesList movies={movies} />;
-            }}
-          />
-
-          <Route
-            exact
-            path="/"
-            render={() => {
-              if (!user)
-                return (
-                  <Col>
-                    <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-                  </Col>
-                );
-              return movies.map((m) => (
-                <Col md={3} key={m._id}>
-                  <MoviesList movies={m} />
-                </Col>
-              ));
             }}
           />
           <Route
@@ -246,7 +227,9 @@ class MainView extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-  return { movies: state.movies };
+  return { movies: state.movies, user: state.user, userData: state.userData };
 };
 
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser, setUserData })(
+  MainView
+);
