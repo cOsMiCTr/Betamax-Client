@@ -6,6 +6,9 @@ import { Container, Card, Row, Col, Form } from "react-bootstrap";
 import { Button } from "../button/button";
 import { MovieCard } from "../movie-card/movie-card";
 import { Button as ButtonSpecial } from "react-bootstrap";
+import { connect } from 'react-redux';
+import { setUser, setUserData } from '../../actions/actions';
+import MainView from "../main-view/main-view";
 
 export class ProfileView extends React.Component {
   constructor() {
@@ -155,8 +158,10 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.props;
+    const { movies, users } = this.props;
     const { Username, Email, Birthday, FavoriteMovies } = this.state;
+
+
 
     const FavoriteMoviesArray =
       movies.filter((movie) => FavoriteMovies.includes(movie._id)) || [];
@@ -218,10 +223,11 @@ export class ProfileView extends React.Component {
 
                   <Form.Group>
                     <Form.Label>Birthday</Form.Label>
+                    {/* {JSON.stringify(Birthday)} */}
                     <Form.Control
                       type="date"
                       name="Birthday"
-                      value={Birthday}
+                      value={new Date(Birthday, 3, 6)}
                       onChange={(e) => this.setBirthday(e.target.value)}
                     />
                   </Form.Group>
@@ -265,6 +271,7 @@ export class ProfileView extends React.Component {
   }
 }
 
+
 ProfileView.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
@@ -288,7 +295,7 @@ ProfileView.propTypes = {
       Username: PropTypes.string,
       Password: PropTypes.string,
       Email: PropTypes.string,
-      Birthday: PropTypes.string,
+      Birthday: PropTypes.instanceOf(Date),
       FavoriteMovies: PropTypes.arrayOf(PropTypes.string),
     })
   ),

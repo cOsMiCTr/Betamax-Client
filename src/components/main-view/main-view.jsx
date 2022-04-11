@@ -5,11 +5,9 @@ import { connect } from "react-redux";
 import "./main-view.scss";
 
 import { LoginView } from "../login-view/login-view";
-import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { DirectorView } from "../director-view/director-view";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { Button } from "../button/button";
 import { NavbarView } from "../nav-bar/nav-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import { RegistrationView } from "../registration-view/registration-view";
@@ -40,6 +38,16 @@ class MainView extends React.Component {
         console.log(error);
       });
   }
+
+  // getUser() {
+  //   let response = {
+  //     data: {
+  //       Username: 'Batu',
+  //       Password: 'test123'
+  //     }
+  //   }
+  //   this.props.setUserData(response.data);
+  // }
 
   componentDidMount() {
     let accessToken = localStorage.getItem("token");

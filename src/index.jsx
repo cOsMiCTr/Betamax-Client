@@ -26,5 +26,6 @@ class BetamaxApplication extends React.PureComponent {
 // Find the root of our app
 const container = document.getElementsByClassName("app-container")[0];
 
+
 // Tell React to render our app in the root DOM element
 ReactDOM.render(React.createElement(BetamaxApplication), container);
