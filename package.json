@@ -2,7 +2,7 @@
   "name": "betamax-client",
   "version": "1.0.0",
   "description": "A mini movie page where you can create your own favorite list of movies and maybe watch them ;)",
-  "main": "src/index.html",
+  "main": "./src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html"
