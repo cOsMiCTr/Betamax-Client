@@ -3,9 +3,8 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import "./profile-view.scss";
 import { Container, Card, Row, Col, Form } from "react-bootstrap";
-import { Button } from "../button/button";
 import { MovieCard } from "../movie-card/movie-card";
-import { Button as ButtonSpecial } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { setUser, setUserData } from '../../actions/actions';
 import MainView from "../main-view/main-view";
@@ -246,7 +245,7 @@ export class ProfileView extends React.Component {
                     history.back();
                   }}
                   label="Back"
-                ></Button>
+                >Back</Button>
                 <Button
                   label="Delete User"
                   onClick={() => this.deleteUser()}
@@ -260,7 +259,7 @@ export class ProfileView extends React.Component {
         <Row>
           {FavoriteMoviesArray.map((movie) => (
             <Col md={4} key={movie._id} className="my-2">
-              <Button label="Remove" onClick={(e) => this.onRemoveFavorite(e, movie)}/>
+              <Button label="Remove" onClick={(e) => this.onRemoveFavorite(e, movie)}>Remove</Button>
               <MovieCard movie={movie}/>
               
             </Col>

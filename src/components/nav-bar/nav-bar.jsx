@@ -1,6 +1,6 @@
 import React from 'react';
-import { Navbar, Container, Nav } from 'react-bootstrap';
-import { Button } from '../button/button';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+
 import { Link } from 'react-router-dom';
 import './nav-bar.scss';
 
@@ -34,7 +34,7 @@ export function NavbarView({user}) {
                         {isAuth() && (
                             <Button variant="link" label="Logout" onClick={() => {
                                 onLoggedOut() 
-                            }}></Button>
+                            }}>Log out</Button>
                         )}
                         {!isAuth() && (
                             <Nav.Link href="/register">Register</Nav.Link>

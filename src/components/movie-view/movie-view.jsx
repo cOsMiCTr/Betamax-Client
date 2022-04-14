@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "../button/button";
-import { Card, Container, Row, Col, CardGroup } from "react-bootstrap";
+
+import { Card, Container, Row, Col, CardGroup, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
 import axios from "axios";
@@ -118,14 +118,14 @@ export class MovieView extends React.Component {
                       this.addFavorite(movie);
                     }}
                     style={{ textAlign: "center" }}
-                  ></Button>
+                  >+ Add to List</Button>
                   <Button
                     label="Back"
                     onClick={() => {
                       history.back();
                     }}
                     style={{ textAlign: "center" }}
-                  ></Button>
+                  >Back</Button>
                 </Card.Body>
               </Card>
             </CardGroup>
