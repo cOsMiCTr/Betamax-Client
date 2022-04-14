@@ -13,7 +13,7 @@ import { ProfileView } from "../profile-view/profile-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { GenreView } from "../genre-view/genre-view";
 
-import { setMovies, setUser, setUserData } from "../../actions/actions";
+import { setMovies, setUser, setUserData, getToken } from "../../actions/actions";
 
 import MoviesList from "../movies-list/movies-list";
 
@@ -39,15 +39,7 @@ class MainView extends React.Component {
       });
   }
 
-  // getUser() {
-  //   let response = {
-  //     data: {
-  //       Username: 'Batu',
-  //       Password: 'test123'
-  //     }
-  //   }
-  //   this.props.setUserData(response.data);
-  // }
+
 
   componentDidMount() {
     let accessToken = localStorage.getItem("token");
@@ -238,6 +230,6 @@ let mapStateToProps = (state) => {
   return { movies: state.movies, user: state.user, userData: state.userData };
 };
 
-export default connect(mapStateToProps, { setMovies, setUser, setUserData })(
+export default connect(mapStateToProps, { setMovies, setUser, setUserData, getToken })(
   MainView
 );

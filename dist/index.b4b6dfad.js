@@ -29727,15 +29727,6 @@ class MainView extends _reactDefault.default.Component {
             console.log(error);
         });
     }
-    // getUser() {
-    //   let response = {
-    //     data: {
-    //       Username: 'Batu',
-    //       Password: 'test123'
-    //     }
-    //   }
-    //   this.props.setUserData(response.data);
-    // }
     componentDidMount() {
         let accessToken = localStorage.getItem("token");
         if (accessToken !== null) {
@@ -29791,7 +29782,7 @@ class MainView extends _reactDefault.default.Component {
                     user: user1
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 111,
+                    lineNumber: 103,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactBootstrap.Row, {
@@ -29815,7 +29806,7 @@ class MainView extends _reactDefault.default.Component {
                             }
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 113,
+                            lineNumber: 105,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -29831,7 +29822,7 @@ class MainView extends _reactDefault.default.Component {
                             }
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 127,
+                            lineNumber: 119,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -29851,7 +29842,7 @@ class MainView extends _reactDefault.default.Component {
                             }
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 138,
+                            lineNumber: 130,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -29876,7 +29867,7 @@ class MainView extends _reactDefault.default.Component {
                             }
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 153,
+                            lineNumber: 145,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -29904,7 +29895,7 @@ class MainView extends _reactDefault.default.Component {
                             }
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 173,
+                            lineNumber: 165,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.Route, {
@@ -29932,19 +29923,19 @@ class MainView extends _reactDefault.default.Component {
                             }
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 202,
+                            lineNumber: 194,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 112,
+                    lineNumber: 104,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 110,
+            lineNumber: 102,
             columnNumber: 7
         }, this));
     }
@@ -29959,7 +29950,8 @@ let mapStateToProps = (state)=>{
 exports.default = _reactRedux.connect(mapStateToProps, {
     setMovies: _actions.setMovies,
     setUser: _actions.setUser,
-    setUserData: _actions.setUserData
+    setUserData: _actions.setUserData,
+    getToken: _actions.getToken
 })(MainView);
 
   $parcel$ReactRefreshHelpers$f7a6.postlude(module);
@@ -36715,6 +36707,10 @@ parcelHelpers.export(exports, "ADD_FAVMOVIES", ()=>ADD_FAVMOVIES
 );
 parcelHelpers.export(exports, "REM_FAVMOVIES", ()=>REM_FAVMOVIES
 );
+parcelHelpers.export(exports, "GET_TOKEN", ()=>GET_TOKEN
+);
+parcelHelpers.export(exports, "getToken", ()=>getToken
+);
 parcelHelpers.export(exports, "setMovies", ()=>setMovies
 );
 parcelHelpers.export(exports, "addFavoriteMovies", ()=>addFavoriteMovies
@@ -36733,6 +36729,12 @@ const SET_FILTER = "SET_FILTER";
 const SET_USERDATA = "SET_USERDATA";
 const ADD_FAVMOVIES = "ADD_FAVMOVIES";
 const REM_FAVMOVIES = "REM_FAVMOVIES";
+const GET_TOKEN = "GET_TOKEN";
+function getToken() {
+    return {
+        type: 'GET_TOKEN'
+    };
+}
 function setMovies(value) {
     return {
         type: SET_MOVIES,
@@ -38272,6 +38274,12 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _redux = require("redux");
 var _actions = require("../actions/actions");
+// function getToken (state = '', action) {
+//   switch(action.type){
+//     case GET_TOKEN:
+//       return localStorage.getItem("token");
+//   }
+// }
 function visibilityFilter(state = '', action) {
     switch(action.type){
         case _actions.SET_FILTER:

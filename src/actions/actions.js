@@ -5,6 +5,15 @@ export const SET_USERDATA = "SET_USERDATA";
 export const ADD_FAVMOVIES = "ADD_FAVMOVIES";
 export const REM_FAVMOVIES = "REM_FAVMOVIES";
 
+export const GET_TOKEN = "GET_TOKEN";
+
+export  function getToken() {
+    return {
+      type: 'GET_TOKEN'
+    }
+}
+
+
 export function setMovies(value) {
   return {
     type: SET_MOVIES,

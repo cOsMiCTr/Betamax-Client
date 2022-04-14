@@ -1,6 +1,14 @@
 import { combineReducers } from 'redux';
 
-import { SET_FILTER, SET_MOVIES, SET_USER, SET_USERDATA, ADD_FAVMOVIES, REM_FAVMOVIES  } from '../actions/actions';
+import { SET_FILTER, SET_MOVIES, SET_USER, SET_USERDATA, ADD_FAVMOVIES, REM_FAVMOVIES, GET_TOKEN  } from '../actions/actions';
+
+
+// function getToken (state = '', action) {
+//   switch(action.type){
+//     case GET_TOKEN:
+//       return localStorage.getItem("token");
+//   }
+// }
 
 function visibilityFilter(state = '', action) {
   switch (action.type) {
