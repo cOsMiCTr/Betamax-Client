@@ -1,24 +1,26 @@
 import React from "react";
 import axios from "axios";
 import { Row, Col } from "react-bootstrap";
+import { connect } from "react-redux";
 import "./main-view.scss";
 
 import { LoginView } from "../login-view/login-view";
-import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { DirectorView } from "../director-view/director-view";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import { Button } from "../button/button";
 import { NavbarView } from "../nav-bar/nav-bar";
 import { ProfileView } from "../profile-view/profile-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { GenreView } from "../genre-view/genre-view";
 
-export class MainView extends React.Component {
+import { setMovies, setUser, setUserData, getToken } from "../../actions/actions";
+
+import MoviesList from "../movies-list/movies-list";
+
+class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
       user: null,
       isFavorite: false,
     };
@@ -30,14 +32,14 @@ export class MainView extends React.Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        this.setState({
-          movies: response.data,
-        });
+        this.props.setMovies(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
+
 
   componentDidMount() {
     let accessToken = localStorage.getItem("token");
@@ -68,33 +70,34 @@ export class MainView extends React.Component {
     });
   }
 
-      // Delete account
-      onDeleteUser() {
-        const Username = localStorage.getItem("user");
-        const token = localStorage.getItem("token");
-        
-        axios
-          .delete(`https://betamax-cosmictr.herokuapp.com/users/${Username}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-          .then((response) => {
-            console.log(response);
-            
-            localStorage.removeItem("user");
-            localStorage.removeItem("token");
-            this.setState({
-              user: null,
-            });
-            alert("Profile deleted");
-            window.open("/", "_self");
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
+  // Delete account
+  onDeleteUser() {
+    const Username = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    axios
+      .delete(`https://betamax-cosmictr.herokuapp.com/users/${Username}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        this.setState({
+          user: null,
+        });
+        alert("Profile deleted");
+        window.open("/", "_self");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   render() {
-    const { movies, user } = this.state;
+    let { user } = this.state;
+    let { movies } = this.props;
     return (
       <Router>
         <NavbarView user={user} />
@@ -109,11 +112,8 @@ export class MainView extends React.Component {
                     <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                   </Col>
                 );
-              return movies.map((m) => (
-                <Col md={3} key={m._id}>
-                  <MovieCard movie={m} />
-                </Col>
-              ));
+              if (movies.length === 0) return <div className="main-view" />;
+              return <MoviesList movies={movies} />;
             }}
           />
           <Route
@@ -226,4 +226,10 @@ export class MainView extends React.Component {
   }
 }
 
-export default MainView;
+let mapStateToProps = (state) => {
+  return { movies: state.movies, user: state.user, userData: state.userData };
+};
+
+export default connect(mapStateToProps, { setMovies, setUser, setUserData, getToken })(
+  MainView
+);

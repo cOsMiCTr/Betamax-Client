@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Button } from "../button/button";
+import { BButton } from "../button/button";
 import "./login-view.scss";
-import { Form, Card, Col, Row, Container, CardGroup } from "react-bootstrap";
+import { Form, Card, Col, Row, Container, CardGroup, Button } from "react-bootstrap";
 import FadeIn from "react-fade-in";
 import axios from "axios";
 import PropTypes from "prop-types";
@@ -131,7 +131,7 @@ export function LoginView(props) {
                         type="submit"
                         label="Login"
                         onClick={handleSubmit}
-                      ></Button>
+                      >Log-in</Button>
                     </div>
                   </Form> 
                 </Card.Body>

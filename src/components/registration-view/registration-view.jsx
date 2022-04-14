@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Container, Form, Col, Row } from "react-bootstrap";
+import { Container, Form, Button} from "react-bootstrap";
 import PropTypes from "prop-types";
 import { Redirect, Link } from "react-router-dom";
 import "./registration-view.scss";
-import { Button } from "../button/button";
 import FadeIn from "react-fade-in";
 
-export function RegistrationView(props) {
+export function RegistrationView() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
@@ -198,24 +197,16 @@ export function RegistrationView(props) {
         </Form.Group>
 
         <Link to={"/"}>
-          <Button size="sm" label="Cancel" onClick={()=>""}></Button>
+          <Button size="sm" label="Cancel" onClick={()=>""}>Cancel</Button>
         </Link>
         <Button
           size="sm"
           label="Register"
           onClick={handleSubmit}
           style={{ textAlign: "center" }}
-        ></Button>
+        >Register</Button>
       </Form>
     </Container>
   );
 }
 
-RegistrationView.propTypes = {
-  register: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
-    Password: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthday: PropTypes.string.isRequired,
-  }),
-};

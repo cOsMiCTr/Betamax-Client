@@ -1,47 +1,45 @@
 .main-view {
+  -o-transition: all .5s;
   grid-template-rows: 80px calc(75vh - 80px) 25vh 80px;
-  -o-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+  transition: all .5s;
 }
 
 .inner {
+  transition: max-height .2s;
   overflow: hidden;
-  transition: max-height 0.2s ease;
 }
 
 .btn {
   float: right;
 }
+
 .glow-on-hover {
-  border: none;
-  outline: none;
   color: #fff;
-  background: #111;
   cursor: pointer;
-  position: relative;
   z-index: 0;
+  background: #111;
+  border: none;
   border-radius: 10px;
+  outline: none;
   margin: 1rem;
+  position: relative;
 }
 
 .glow-on-hover:before {
   content: "";
-  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background-size: 400%;
   z-index: -1;
   filter: blur(5px);
   width: calc(100% + 4px);
   height: calc(100% + 4px);
-  animation: glowing 20s linear infinite;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  background: linear-gradient(45deg, red, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, red) 0 0 / 400%;
   border-radius: 1px;
   outline: none;
+  transition: opacity .3s ease-in-out;
+  animation: glowing 20s linear infinite;
+  position: absolute;
+  top: -2px;
+  left: -2px;
 }
 
 .glow-on-hover:active {
@@ -50,7 +48,7 @@
 }
 
 .glow-on-hover:active:after {
-  background: transparent;
+  background: none;
   outline: none;
 }
 
@@ -62,34 +60,65 @@
 .glow-on-hover:after {
   z-index: -1;
   content: "";
-  position: absolute;
   width: 100%;
   height: 100%;
   background: #111;
-  left: 0;
-  top: 0;
   border-radius: 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 @keyframes glowing {
   0% {
     background-position: 0 0;
   }
+
   50% {
     background-position: 400% 0;
   }
+
   100% {
     background-position: 0 0;
   }
 }
 
 
+
+.btn-primary {
+  margin: "3rem";
+}
+
+.label {
+  margin-bottom: 1rem;
+  font-family: futura;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.main-nav {
+  background-color: #fff;
+}
+
+.profile-name {
+  align-self: center;
+}
+
+.card {
+  border-radius: 10px;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 5px 5px 10px 5px #3333331a;
+}
+
 img {
   width: 350px;
 }
 
 .accordion-button {
-  background-color: transparent;
+  background-color: #0000;
   border: none;
   font-size: 20px;
 }
@@ -99,46 +128,33 @@ button:focus {
 }
 
 .accordion-button:hover {
-  background-color: transparent;
+  background-color: #0000;
   border: none;
   font-size: 20px;
 }
 
-.card {
+.movie-card {
+  width: 100%;
+  border: 0 solid #ffff331a;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
   display: flex;
-}
-.btn-primary {
-  margin: "3rem";
-}
-.main-nav {
-  background-color: white;
+  box-shadow: 5px 5px 10px 5px #3333331a;
 }
 
-a {
-  align-self: center;
-}
+
 
 .label {
-  font-family: "futura";
+  margin-bottom: 1rem;
+  font-family: futura;
   font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 1rem;
-}
-.label {
-  font-family: "futura";
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-* {
-  font-family: "futura";
 }
 
-.heading {
-  font-family: "futura";
+*, .heading, .heading {
+  font-family: futura;
 }
 
-.heading {
-  font-family: "futura";
-}
 /*# sourceMappingURL=index.2b25e0b4.css.map */
