@@ -57407,8 +57407,6 @@ require("./director-view.scss");
 
 var _reactBootstrap = require("react-bootstrap");
 
-var _button = require("../button/button");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -57474,7 +57472,7 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, "Death year: "), /*#__PURE__*/_react.default.createElement("span", {
         className: "value"
-      }, director.DeathYear)), /*#__PURE__*/_react.default.createElement(_button.Button, {
+      }, director.DeathYear)), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
         label: "Back",
         onClick: function onClick() {
           history.back();
@@ -57482,7 +57480,7 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
         style: {
           textAlign: "center"
         }
-      }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+      }, "Back"))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
         style: {
           textAlign: "center",
           fontSize: "36px",
@@ -57519,7 +57517,7 @@ DirectorView.proptypes = {
     DeathYear: _propTypes.default.number
   }).isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./director-view.scss":"components/director-view/director-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../button/button":"components/button/button.jsx"}],"components/nav-bar/nav-bar.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./director-view.scss":"components/director-view/director-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/nav-bar/nav-bar.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -58351,8 +58349,6 @@ require("./genre-view.scss");
 
 var _reactBootstrap = require("react-bootstrap");
 
-var _button = require("../button/button");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -58410,7 +58406,7 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
         className: "label"
       }, "Description: "), /*#__PURE__*/_react.default.createElement("span", {
         className: "value"
-      }, genre.Description)), /*#__PURE__*/_react.default.createElement(_button.Button, {
+      }, genre.Description)), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
         label: "Back",
         onClick: function onClick() {
           history.back();
@@ -58418,7 +58414,7 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
         style: {
           textAlign: "center"
         }
-      }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+      }, "Back"))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
         style: {
           textAlign: "center",
           fontSize: "36px",
@@ -58453,7 +58449,7 @@ GenreView.proptypes = {
     Description: _propTypes.default.string.isRequired
   }).isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./genre-view.scss":"components/genre-view/genre-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../button/button":"components/button/button.jsx"}],"components/visibility-filter-input/visibility-filter-input.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","./genre-view.scss":"components/genre-view/genre-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/visibility-filter-input/visibility-filter-input.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -58968,7 +58964,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49959" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52087" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
