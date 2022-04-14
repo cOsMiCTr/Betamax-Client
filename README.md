@@ -1,4 +1,4 @@
-# Betamax [![Netlify Status](https://api.netlify.com/api/v1/badges/3a505d13-20e1-4473-b213-ea12aff6335a/deploy-status)](https://app.netlify.com/sites/cosmictr/deploys)
+# Betamax [![Netlify Status](https://api.netlify.com/api/v1/badges/99de68b1-5c22-424a-9c3e-11a55f086410/deploy-status)](https://app.netlify.com/sites/cosmictr/deploys)
 
 A mini movie page where you can create your own favorite list of movies and maybe watch them ;)
 
