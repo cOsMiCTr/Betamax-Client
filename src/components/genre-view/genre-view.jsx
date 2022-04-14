@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './genre-view.scss';
-import {Container, Card, Row} from 'react-bootstrap';
-import { Button } from '../button/button';
+import {Container, Card, Row, Button} from 'react-bootstrap';
+
 
 export class GenreView extends React.Component {
 
@@ -29,7 +29,7 @@ export class GenreView extends React.Component {
                       history.back();
                     }}
                     style={{ textAlign: "center" }}
-                  ></Button>
+                  >Back</Button>
                     </Card.Body>
                 </Card>
                 <Row style={{ textAlign: "center", fontSize: "36px", margin:"2rem", display:"grid"}}>

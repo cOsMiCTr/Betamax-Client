@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./director-view.scss";
-import { Container, Card } from "react-bootstrap";
-import { Button } from "../button/button";
+import { Container, Card, Button } from "react-bootstrap";
+
 import { Row } from "react-bootstrap";
 
 export class DirectorView extends React.Component {
@@ -41,7 +41,7 @@ export class DirectorView extends React.Component {
                 history.back();
               }}
               style={{ textAlign: "center" }}
-            ></Button>
+            >Back</Button>
           </Card.Body>
         </Card>
         <Row
